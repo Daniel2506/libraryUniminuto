@@ -13,6 +13,8 @@ import java.time.Instant;
 import java.util.Date;
 import modelo.usuario;
 import DAOS.coneccion;
+import DAOS.daos;
+import base.conectar;
 
 /**
  *
@@ -23,7 +25,6 @@ public class testConexion extends javax.swing.JFrame {
     /**
      * Creamos lo objetos de la clase conexion
      */
-    coneccion con;
 
     
     public testConexion() {
@@ -163,8 +164,11 @@ public class testConexion extends javax.swing.JFrame {
         user.setFecha_nacimiento(txt_calendario.getText());
         user.setTelefono(txt_telefono.getText());
         user.setNumero_tarjeta(Integer.parseInt(txt_targeta.getText()));
+        System.out.println("" + user.getNombre() + "','"+user.getDireccion()+"','"+user.getFecha_nacimiento()+"','"+user.getTelefono()+"','"+user.getNumero_tarjeta()+"");
         
-        con.insertar(user);
+        daos cn=new daos();
+        cn.insertarUser(user);
+        //con.insertar(user);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

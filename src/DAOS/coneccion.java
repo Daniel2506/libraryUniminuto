@@ -36,15 +36,4 @@ public class coneccion {
         return cn;
     }
         
-    public void insertar(usuario user ){
-        System.out.println("" + user.getNombre() + "','"+user.getDireccion()+"','"+user.getFecha_nacimiento()+"','"+user.getTelefono()+"','"+user.getNumero_tarjeta()+"");
-        try { 
-            // sintaxis ('cristhian fonseca', 'cr12a#34asur ', '1596423', '1994-08-23', 123698),
-            stmt = cn.createStatement();
-            stmt.executeUpdate("INSERT INTO usuario VALUES('" + user.getNombre() + "','"+user.getDireccion()+"','"+user.getTelefono()+"','"+user.getFecha_nacimiento()+"','"+user.getNumero_tarjeta()+"')");
-            System.out.println("Los valores han sido agregados a la base de datos ");
-        } catch (SQLException ex) {
-            Logger.getLogger(coneccion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
