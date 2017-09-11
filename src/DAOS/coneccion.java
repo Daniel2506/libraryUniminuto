@@ -7,7 +7,12 @@ package DAOS;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.usuario;
 
 /**
  *
@@ -16,6 +21,7 @@ import javax.swing.JOptionPane;
 public class coneccion {
 
     Connection cn;
+    private static Statement stmt;
 
     public Connection conexion() {
         try {
@@ -29,5 +35,16 @@ public class coneccion {
         }
         return cn;
     }
-
+        
+    public void insertar(usuario user ){
+        System.out.println("" + user.getNombre() + "','"+user.getDireccion()+"','"+user.getFecha_nacimiento()+"','"+user.getTelefono()+"','"+user.getNumero_tarjeta()+"");
+        try { 
+            // sintaxis ('cristhian fonseca', 'cr12a#34asur ', '1596423', '1994-08-23', 123698),
+            stmt = cn.createStatement();
+            stmt.executeUpdate("INSERT INTO usuario VALUES('" + user.getNombre() + "','"+user.getDireccion()+"','"+user.getTelefono()+"','"+user.getFecha_nacimiento()+"','"+user.getNumero_tarjeta()+"')");
+            System.out.println("Los valores han sido agregados a la base de datos ");
+        } catch (SQLException ex) {
+            Logger.getLogger(coneccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
