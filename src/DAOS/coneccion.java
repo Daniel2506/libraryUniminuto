@@ -27,8 +27,7 @@ public class coneccion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/biblioteca", "root", "");
-            JOptionPane.showMessageDialog(null, "conectado");
-
+            //JOptionPane.showMessageDialog(null, "conectado");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error" + e);
 

@@ -8,8 +8,11 @@ package base;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import modelo.usuario;
 
 /**
  *
@@ -18,6 +21,7 @@ import java.sql.Statement;
 public class conectar {
 
     private PreparedStatement psinsert;
+    private ResultSet rs;
     private Statement stmm;
     private Connection con;
 
@@ -37,5 +41,30 @@ public class conectar {
         psinsert.setString(8, l.getReferencia());
         
         psinsert.executeUpdate();
+    }
+    
+    public ArrayList<libros> consultar () {
+        ArrayList<libros> list = new ArrayList();
+        
+        try {
+            String url = "jdbc:mysql://localhost/biblioteca?user=root";
+            String sql = "SELECT * FROM libros";
+            con = DriverManager.getConnection(url);
+            stmm = con.createStatement();
+            psinsert = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(sql);
+            rs = psinsert.executeQuery();
+            while (rs.next()) {    
+                libros book = new libros();
+                book.setId_libros(rs.getInt("id_libros")); 
+                book.setTitulo(rs.getString("titulo")); 
+                book.setAutor(rs.getString("autor")); 
+                book.setCantidad(rs.getInt("cantidad")); 
+                book.setTiempo_limite(rs.getInt("tiempo_limite"));
+                list.add(book);
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

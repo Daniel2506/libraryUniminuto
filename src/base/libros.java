@@ -29,6 +29,8 @@ public class libros {
         this.estado = estado;
         this.referencia = referencia;
     }
+    public libros () {
+    }
 
     public int getId_libros() {
         return id_libros;

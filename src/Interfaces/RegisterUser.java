@@ -15,19 +15,20 @@ import modelo.usuario;
 import DAOS.coneccion;
 import DAOS.daos;
 import base.conectar;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author JoseGonzalez
  */
-public class testConexion extends javax.swing.JFrame {
+public class RegisterUser extends javax.swing.JFrame {
 
     /**
      * Creamos lo objetos de la clase conexion
      */
 
     
-    public testConexion() {
+    public RegisterUser() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -67,7 +68,7 @@ public class testConexion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Conectar");
+        jButton1.setText("Registar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -102,10 +103,7 @@ public class testConexion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -120,7 +118,10 @@ public class testConexion extends javax.swing.JFrame {
                             .addComponent(txt_nombre)
                             .addComponent(txt_direccion)
                             .addComponent(txt_telefono)
-                            .addComponent(txt_calendario, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))))
+                            .addComponent(txt_calendario, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(jButton1)))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -146,9 +147,9 @@ public class testConexion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_targeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(20, 20, 20))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,7 +168,14 @@ public class testConexion extends javax.swing.JFrame {
         System.out.println("" + user.getNombre() + "','"+user.getDireccion()+"','"+user.getFecha_nacimiento()+"','"+user.getTelefono()+"','"+user.getNumero_tarjeta()+"");
         
         daos cn=new daos();
-        cn.insertarUser(user);
+        if (cn.insertarUser(user)) {
+            JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
+            this.setVisible(false);
+            Menu menu = new Menu();
+            menu.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Verifique información por favor");
+        }
         //con.insertar(user);
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -200,20 +208,21 @@ public class testConexion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(testConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(testConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(testConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(testConexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new testConexion().setVisible(true);
+                new RegisterUser().setVisible(true);
             }
         });
     }

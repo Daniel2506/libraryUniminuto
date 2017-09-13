@@ -27,6 +27,7 @@ public class RegistroLibro extends javax.swing.JFrame {
      */
     public RegistroLibro() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -201,6 +202,8 @@ public class RegistroLibro extends javax.swing.JFrame {
         try {
             cn.insertar(l1);
             JOptionPane.showMessageDialog(null, "Registro guardado");
+            Menu menu = new Menu();
+            menu.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(RegistroLibro.class.getName()).log(Level.SEVERE, null, ex);
         }
