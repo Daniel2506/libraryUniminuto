@@ -21,6 +21,7 @@ import modelo.usuario;
 public class conectar {
 
     private PreparedStatement psinsert;
+    private PreparedStatement psinsert2;
     private ResultSet rs;
     private Statement stmm;
     private Connection con;
@@ -88,15 +89,15 @@ public class conectar {
                 best = Integer.parseInt(rs.getString(7));
             }
 
-            psinsert = con.prepareStatement("INSERT INTO `devoluciones`(`id_libro`, `id_usuario`, "
-                    + "`id_prestamo`, `fecha_entrega`, `id_multimedia`, `id_libro_best`) VALUES (?,?,?,?,?,?)");
-            psinsert.setInt(1, libro);
-            psinsert.setInt(2, usuario);
-            psinsert.setInt(3, prestamo);
-            psinsert.setString(4, entrega);
-            psinsert.setInt(5, multimedia);
-            psinsert.setInt(6, best);
-            psinsert.executeUpdate();
+            psinsert2 = con.prepareStatement("INSERT INTO devoluciones(id_libro, id_usuario, "
+                    + "id_prestamo, fecha_entrega, id_multimedia, id_libro_best) VALUES (?,?,?,?,?,?)");
+            psinsert2.setInt(1, libro);
+            psinsert2.setInt(2, usuario);
+            psinsert2.setInt(3, prestamo);
+            psinsert2.setString(4, entrega);
+            psinsert2.setInt(5, multimedia);
+            psinsert2.setInt(6, best);
+            psinsert2.executeUpdate();
 
         } catch (Exception e) {
         }
